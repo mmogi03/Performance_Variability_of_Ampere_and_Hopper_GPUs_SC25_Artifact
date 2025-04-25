@@ -1,0 +1,81 @@
+#############################################################
+## ADJUSTABLE PARAMETERS                                   ##
+#############################################################
+seed 314159
+
+structure         2x2x2stmv.psf
+coordinates       2x2x2stmv.pdb
+
+
+#############################################################
+## SIMULATION PARAMETERS                                   ##
+#############################################################
+
+# Input
+paraTypeCharmm	    on
+parameters          par_all27_prot_na.inp
+temperature         298
+
+# Force-Field Parameters
+exclude             scaled1-4
+oneFourScaling      1.0
+cutoff              12.
+switching           on
+switchdist          10.
+pairlistdist        13.5
+
+# Integrator Parameters
+rigidbonds all
+timestep            2.0
+nonbondedFreq       1
+fullElectFrequency  3
+pairlistsPerCycle   4
+stepspercycle       24
+
+# Constant Temperature Control
+langevin            on    ;# do langevin dynamics
+langevinDamping     5     ;# damping coefficient (gamma) of 5/ps
+langevinTemp        298
+langevinHydrogen    off    ;# don't couple langevin bath to hydrogens
+
+# Constant Pressure Control (variable volume)
+useGroupPressure      yes ;# needed for rigidBonds
+useFlexibleCell       no
+useConstantArea       no
+
+langevinPiston        on 
+langevinPistonTarget  1.01325 ;#  in bar -> 1 atm
+langevinPistonPeriod  200.
+langevinPistonDecay   10.
+langevinPistonTemp    298
+
+langevinPistonBarrier off
+
+cellBasisVector1     [expr 2 * 216.832]    0.   0.
+cellBasisVector2     0.   [expr 2 * 216.832]   0.
+cellBasisVector3     0.    0.   [expr 2 * 216.832]
+cellOrigin           0.    0.    0.
+
+#PME
+PME                  on
+PMEInterpOrder       8
+PMEGridSpacing       2.1
+PMEGridSizeX         [expr 2 * 108]
+PMEGridSizeY         [expr 2 * 108]
+PMEGridSizeZ         [expr 2 * 108]
+
+pmepencils 1
+pmeprocessors [numNodes]
+
+#ldBalancer hybrid
+ldBalancer none 
+FFTWEstimate yes
+FFTWUseWisdom no
+
+# Output
+outputName          2x2x2stmv-output 
+
+outputEnergies      600
+outputTiming        600
+
+numsteps            6000
