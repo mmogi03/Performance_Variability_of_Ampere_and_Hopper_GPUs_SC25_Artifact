@@ -111,10 +111,10 @@ echo 'Finished Spatial Analysis!'
 sleep 60
 
 # running TEMPORAL
-echo 'Running Temporal Analysis...'
-srun  --ntasks=16 --ntasks-per-node=1 /bin/bash $SCRATCH/$OUTPUT_FOLDER/temporal_data/script.sh $SCRATCH/$OUTPUT_FOLDER /tmp/$OUTPUT_FOLDER
-wait
+# echo 'Running Temporal Analysis...'
+# srun  --ntasks=16 --ntasks-per-node=1 /bin/bash $SCRATCH/$OUTPUT_FOLDER/temporal_data/script.sh $SCRATCH/$OUTPUT_FOLDER /tmp/$OUTPUT_FOLDER
+# wait
 
-echo 'Finished Temporal Analysis!'
+# echo 'Finished Temporal Analysis!'
 
 exit
