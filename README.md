@@ -21,7 +21,7 @@ There were 8 experiments we ran in our paper:
 
 For each experiment, there is an associated directory in this repository. `SC25_perlmutter`, `SC25_vista`, and `SC25_dtai` contain the code for the micro-benchmarking experiments (note that `SC25_vista` also contains code for running the timestamp and temporal benchmarking experiments, and `SC25_dtai` also contains code for dedicated micro-benchmarks). `namd_vista` contains the code for running the NAMD benchmarks. `<INSERT GPT FOLDER NAME HERE>` contains the code for benchmarking the training of GPT-2.
 
-### Run
+### Compile and Run
 To run each of our applications, we provide Slurm scripts that load all necessary modules and compile all necessary library code in each directory. Note that the Slurm scripts must be submitted via `sbatch` on the respective supercomputing machine (Perlmutter, Vista, or DeltaAI), as each machine has specific file systems. Directions to run each application can be found in each applications's `README.md` file (in their corresponding directories).
 
 ### Steps to Reproduce Experiments
