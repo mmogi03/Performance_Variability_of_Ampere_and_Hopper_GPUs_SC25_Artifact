@@ -3,10 +3,10 @@
 #SBATCH -N 1
 #SBATCH --job-name=SC25_Vista_Timestamps
 #SBATCH --mail-type=all
-#SBATCH --mail-user=<EMAIL_ADDRESS>
+#SBATCH --mail-user=mm3201@scarletmail.rutgers.edu
 #SBATCH -o outputs/O_SC25_Vista_Timestamps_%j.out
 #SBATCH -e outputs/E_SC25_Vista_Timestamps_%j.err
-#SBATCH -A <ACCOUNT>
+#SBATCH -A CCR24047
 #SBATCH -p gh
 #SBATCH --time=06:00:00
 #SBATCH --ntasks-per-node=1

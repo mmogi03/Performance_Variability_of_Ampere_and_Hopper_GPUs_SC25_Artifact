@@ -1,12 +1,12 @@
 #!/bin/bash -l
 
-#SBATCH -N 16
+#SBATCH -N 2
 #SBATCH --job-name=SC25_Vista_Experiment
 #SBATCH --mail-type=all
-#SBATCH --mail-user=<EMAIL_ADDRESS>
+#SBATCH --mail-user=mm3201@scarletmail.rutgers.edu
 #SBATCH -o outputs/O_SC25_Vista_Experiment_%j.out
 #SBATCH -e outputs/E_SC25_Vista_Experiment_%j.err
-#SBATCH -A <ACCOUNT>
+#SBATCH -A CCR24047
 #SBATCH -p gh
 #SBATCH --time=06:00:00
 #SBATCH --ntasks-per-node=1
@@ -33,7 +33,7 @@ mkdir $TARGET_DIR
 cp -r $WORK/$REPO_FOLDER/Performance_Variability_of_Ampere_and_Hopper_GPUs_SC25_Artifact/SC25_vista/matrix-matrix $OUTPUT_FOLDER
 cp -r $WORK/$REPO_FOLDER/Performance_Variability_of_Ampere_and_Hopper_GPUs_SC25_Artifact/SC25_vista/matrix-scalar $OUTPUT_FOLDER
 cp -r $WORK/$REPO_FOLDER/Performance_Variability_of_Ampere_and_Hopper_GPUs_SC25_Artifact/SC25_vista/matrix-vector $OUTPUT_FOLDER
-cp -r $WORK/$REPO_FOLDER/Performance_Variability_of_Ampere_and_Hopper_GPUs_SC25_Artifact/SC25_vista/temporal_data $OUTPUT_FOLDER
+# cp -r $WORK/$REPO_FOLDER/Performance_Variability_of_Ampere_and_Hopper_GPUs_SC25_Artifact/SC25_vista/temporal_data $OUTPUT_FOLDER
 
 # Copy the shared folder (which contains dumpGpuPower.cpp and its Makefile)
 cp -r $WORK/$REPO_FOLDER/Performance_Variability_of_Ampere_and_Hopper_GPUs_SC25_Artifact/SC25_vista/shared $OUTPUT_FOLDER
@@ -67,7 +67,7 @@ mkdir $OUTPUT_FOLDER/vista-output/matrix-matrix-output
 mkdir $OUTPUT_FOLDER/vista-output/matrix-matrix-cuda-output
 mkdir $OUTPUT_FOLDER/vista-output/matrix-scalar-output
 mkdir $OUTPUT_FOLDER/vista-output/matrix-vector-output
-mkdir $OUTPUT_FOLDER/vista-output/temporal_data-output
+# mkdir $OUTPUT_FOLDER/vista-output/temporal_data-output
 
 # Create output directories /tmp for I/O
 mkdir /tmp/$OUTPUT_FOLDER
@@ -75,7 +75,7 @@ mkdir /tmp/$OUTPUT_FOLDER/matrix-matrix-output
 mkdir /tmp/$OUTPUT_FOLDER/matrix-matrix-cuda-output
 mkdir /tmp/$OUTPUT_FOLDER/matrix-scalar-output
 mkdir /tmp/$OUTPUT_FOLDER/matrix-vector-output
-mkdir /tmp/$OUTPUT_FOLDER/temporal_data-output
+# mkdir /tmp/$OUTPUT_FOLDER/temporal_data-output
 
 wait
 
@@ -85,25 +85,25 @@ exec $*
 # Running SPATIAL
 echo 'Running Spatial Analysis...'
 echo 'Running matrix-matrix'
-srun  --ntasks=16 --ntasks-per-node=1 /bin/bash $SCRATCH/$OUTPUT_FOLDER/matrix-matrix/script.sh $SCRATCH/$OUTPUT_FOLDER /tmp/$OUTPUT_FOLDER
+srun  --ntasks=2 --ntasks-per-node=1 /bin/bash $SCRATCH/$OUTPUT_FOLDER/matrix-matrix/script.sh $SCRATCH/$OUTPUT_FOLDER /tmp/$OUTPUT_FOLDER
 wait
 echo "Finished matrix-matrix!"
 sleep 60
 
 echo 'Running matrix-matrix-cuda'
-srun  --ntasks=16 --ntasks-per-node=1 /bin/bash $SCRATCH/$OUTPUT_FOLDER/matrix-matrix/script_cuda.sh $SCRATCH/$OUTPUT_FOLDER /tmp/$OUTPUT_FOLDER
+srun  --ntasks=2 --ntasks-per-node=1 /bin/bash $SCRATCH/$OUTPUT_FOLDER/matrix-matrix/script_cuda.sh $SCRATCH/$OUTPUT_FOLDER /tmp/$OUTPUT_FOLDER
 wait
 echo "Finished matrix-matrix-cuda!"
 sleep 60
 
 echo 'Running matrix-vector'
-srun  --ntasks=16 --ntasks-per-node=1 /bin/bash $SCRATCH/$OUTPUT_FOLDER/matrix-vector/script.sh $SCRATCH/$OUTPUT_FOLDER /tmp/$OUTPUT_FOLDER
+srun  --ntasks=2 --ntasks-per-node=1 /bin/bash $SCRATCH/$OUTPUT_FOLDER/matrix-vector/script.sh $SCRATCH/$OUTPUT_FOLDER /tmp/$OUTPUT_FOLDER
 wait
 echo "Finished matrix-vector!"
 sleep 60
 
 echo 'Running matrix-scalar'
-srun  --ntasks=16 --ntasks-per-node=1 /bin/bash $SCRATCH/$OUTPUT_FOLDER/matrix-scalar/script.sh $SCRATCH/$OUTPUT_FOLDER /tmp/$OUTPUT_FOLDER
+srun  --ntasks=2 --ntasks-per-node=1 /bin/bash $SCRATCH/$OUTPUT_FOLDER/matrix-scalar/script.sh $SCRATCH/$OUTPUT_FOLDER /tmp/$OUTPUT_FOLDER
 wait
 echo "Finished matrix-scalar!"
 
