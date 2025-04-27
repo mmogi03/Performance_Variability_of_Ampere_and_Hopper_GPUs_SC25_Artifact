@@ -15,11 +15,11 @@ There were 8 experiments we ran in our paper:
 - **Micro-benchmarks on TACC Vista (GH200s)**: a series of micro-benchmarks we wrote for NVIDIA's GH200s on NCSA DeltaAI (4 GPUs per node) that utilize NVIDIA's cuBLAS library to perform matrix-matrix, matrix-vector, and vector-scalar operations using varying precisions (BF16, FP16, FP32, FP64, FP8).
 - **Timestamp for Iteration Mapping on TACC Vista (GH200s)**: an extension of the micro-benchmarks we wrote for mapping the three phases of a benchmarked kernel to precise timestamps (specifically on NVIDIA's GH200s on TACC Vista running matrix-matrix tensor operations with FP32 precision).
 - **NAMD Benchmarks**: FILL THIS IN
-- **GPT-2 Training Benchmarks**: FILL THIS IN
+- **GPT-4.8B Training Benchmarks**: FILL THIS IN
 - **Dedicated Micro-benchmarks on NCSA DeltaAI (GH200s)**: an extension of the micro-benchmarks we wrote, except it runs on 1 GPU at a time on NVIDIA's GH200s on NCSA DeltaAI.
 - **Temporal Benchmark on TACC Vista (GH200s)**: an extension of the micro-benchmarks we wrote, running matrix-matrix tensor core operations with BF16 and FP64 precision on NVIDIA's GH200s on TACC Vista for four hours.
 
-For each experiment, there is an associated directory in this repository. `SC25_perlmutter`, `SC25_vista`, and `SC25_dtai` contain the code for the micro-benchmarking experiments (note that `SC25_vista` also contains code for running the timestamp and temporal benchmarking experiments, and `SC25_dtai` also contains code for dedicated micro-benchmarks). `namd_vista` contains the code for running the NAMD benchmarks. `<INSERT GPT FOLDER NAME HERE>` contains the code for benchmarking the training of GPT-2.
+For each experiment, there is an associated directory in this repository. `SC25_perlmutter`, `SC25_vista`, and `SC25_dtai` contain the code for the micro-benchmarking experiments (note that `SC25_vista` also contains code for running the timestamp and temporal benchmarking experiments, and `SC25_dtai` also contains code for dedicated micro-benchmarks). `namd_vista` contains the code for running the NAMD benchmarks. `<INSERT GPT FOLDER NAME HERE>` contains the code for benchmarking the training of GPT-4.8B.
 
 ### Compile and Run
 To run each of our applications, we provide Slurm scripts that load all necessary modules and compile all necessary library code in each directory. Note that the Slurm scripts must be submitted via `sbatch` on the respective supercomputing machine (Perlmutter, Vista, or DeltaAI), as each machine has specific file systems. Directions to run each application can be found in each applications's `README.md` file (in their corresponding directories).
@@ -42,4 +42,4 @@ To run each of our applications, we provide Slurm scripts that load all necessar
       https://docs.nvidia.com/cuda/cublas/
     - NAMD
       https://www.ks.uiuc.edu/Research/namd/
-    - FILL IN FOR GPT-2
+    - FILL IN FOR GPT-4.8B
