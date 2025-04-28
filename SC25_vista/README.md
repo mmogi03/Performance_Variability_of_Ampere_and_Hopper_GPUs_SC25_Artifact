@@ -40,13 +40,13 @@ For compiling and launching the full experiment on NVIDIA GPUs, please see secti
 ### Compile and Run Micro-benchmarks
 
 To run the full micro-benchmark experiments, submit the SLURM script `microbenchmarks.slurm` via `sbatch` as shown below:
-    ```
-    sbatch --export=OUTPUT_FOLDER=run_A,REPO_FOLDER=MY_FOLDER,LD_LIBRARY_PATH=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/lib64,INCLUDE=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/include microbenchmarks.slurm
-    ```
-    where
-        - `OUTPUT_FOLDER` specifies the output directory for benchmark logs (note that on Vista, the output folder will be stored in $SCRATCH).
-        - `REPO_FOLDER` is the folder name of where the GitHub repository was cloned into (e.g., `MY_FOLDER`).
-        - `LD_LIBRARY_PATH` and `INCLUDE` are environment variables required to locate the NVIDIA HPC SDK math libraries.
+```
+sbatch --export=OUTPUT_FOLDER=run_A,REPO_FOLDER=MY_FOLDER,LD_LIBRARY_PATH=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/lib64,INCLUDE=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/include microbenchmarks.slurm
+```
+where
+- `OUTPUT_FOLDER` specifies the output directory for benchmark logs (note that on Vista, the output folder will be stored in $SCRATCH).
+- `REPO_FOLDER` is the folder name of where the GitHub repository was cloned into (e.g., `MY_FOLDER`).
+- `LD_LIBRARY_PATH` and `INCLUDE` are environment variables required to locate the NVIDIA HPC SDK math libraries.
 
 Note that by default, each kernel runs for 20 warm-up iterations and records the elapsed time for 100 iterations. For matrix-matrix operations, the size of the matrices used is 32768x32768. For matrix-vector operations, the size of the matrices used is 32768x32768 and the size of the vectors used is 32768x1. For vector-scalar operations, the size of the vectors used is 1073741824x1.
 
@@ -113,9 +113,9 @@ Once the job finishes, on Vista, the folder containing all the data will be stor
                 ├── gpu_power_<GPU_ID>.csv
 ```
 where
-    - `<GPU_ID>` is the local rank of the GPU on the node (e.g., on Vista there is only 1 GPU per node so the ID is 0).
-    - `<GPU_ID>.csv` contains the per-iteration elapsed run-time of the kernel performing the workload with the specified precision. The columns are `size`, `iteration`, and `time(ms)`.
-    - `gpu_power_<GPU_ID>.csv` contains the GPU telemetry recorded by the profiler throughout the kernel's execution. The columns are `sample`, `power(W)`, `gpu_util(%)`, `core_clock(MHz)`, `mem_clock(MHz)`, `timestamp_ns`, `temp(C)`, and `energy(mJ)`.
+- `<GPU_ID>` is the local rank of the GPU on the node (e.g., on Vista there is only 1 GPU per node so the ID is 0).
+- `<GPU_ID>.csv` contains the per-iteration elapsed run-time of the kernel performing the workload with the specified precision. The columns are `size`, `iteration`, and `time(ms)`.
+- `gpu_power_<GPU_ID>.csv` contains the GPU telemetry recorded by the profiler throughout the kernel's execution. The columns are `sample`, `power(W)`, `gpu_util(%)`, `core_clock(MHz)`, `mem_clock(MHz)`, `timestamp_ns`, `temp(C)`, and `energy(mJ)`.
 
 ## Timestamp Experiment
 
@@ -153,13 +153,13 @@ For compiling and launching the full experiment on NVIDIA GPUs, please see secti
 ### Compile and Run Timestamps
 
 To run the full timestamp experiments, submit the SLURM script `timestamps.slurm` via `sbatch` as shown below:
-    ```
-    sbatch --export=OUTPUT_FOLDER=run_A,REPO_FOLDER=MY_FOLDER,LD_LIBRARY_PATH=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/lib64,INCLUDE=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/include timestamps.slurm
-    ```
-    where
-        - `OUTPUT_FOLDER` specifies the output directory for benchmark logs (note that on Vista, the output folder will be stored in $SCRATCH).
-        - `REPO_FOLDER` is the folder name of where the GitHub repository was cloned into (e.g., `MY_FOLDER`).
-        - `LD_LIBRARY_PATH` and `INCLUDE` are environment variables required to locate the NVIDIA HPC SDK math libraries.
+```
+sbatch --export=OUTPUT_FOLDER=run_A,REPO_FOLDER=MY_FOLDER,LD_LIBRARY_PATH=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/lib64,INCLUDE=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/include timestamps.slurm
+```
+where
+- `OUTPUT_FOLDER` specifies the output directory for benchmark logs (note that on Vista, the output folder will be stored in $SCRATCH).
+- `REPO_FOLDER` is the folder name of where the GitHub repository was cloned into (e.g., `MY_FOLDER`).
+- `LD_LIBRARY_PATH` and `INCLUDE` are environment variables required to locate the NVIDIA HPC SDK math libraries.
 
 Note that everything runs the same as the micro-benchmark experiments, with the addition of the timestamp outputs.
 
@@ -226,9 +226,9 @@ Once the job finishes, on Vista, the folder containing all the data will be stor
                 ├── gpu_power_<GPU_ID>.csv
 ```
 where
-    - `<GPU_ID>` is the local rank of the GPU on the node (e.g., on Vista there is only 1 GPU per node so the ID is 0).
-    - `<GPU_ID>.csv` contains the per-iteration elapsed run-time of the kernel performing the workload with the specified precision. The columns are `size`, `iteration`, `start_ts`, `stop_ts`, and `time(ms)`.
-    - `gpu_power_<GPU_ID>.csv` contains the GPU telemetry recorded by the profiler throughout the kernel's execution. The columns are `sample`, `power(W)`, `gpu_util(%)`, `core_clock(MHz)`, `mem_clock(MHz)`, `timestamp_ns`, `temp(C)`, and `energy(mJ)`.
+- `<GPU_ID>` is the local rank of the GPU on the node (e.g., on Vista there is only 1 GPU per node so the ID is 0).
+- `<GPU_ID>.csv` contains the per-iteration elapsed run-time of the kernel performing the workload with the specified precision. The columns are `size`, `iteration`, `start_ts`, `stop_ts`, and `time(ms)`.
+- `gpu_power_<GPU_ID>.csv` contains the GPU telemetry recorded by the profiler throughout the kernel's execution. The columns are `sample`, `power(W)`, `gpu_util(%)`, `core_clock(MHz)`, `mem_clock(MHz)`, `timestamp_ns`, `temp(C)`, and `energy(mJ)`.
 
 ## Temporal Analysis
 
@@ -250,13 +250,13 @@ For compiling and launching the full experiment on NVIDIA GPUs, please see secti
 ### Compile and Run Temporal Analysis
 
 To run the full timestamp experiments, submit the SLURM script `temporal.slurm` via `sbatch` as shown below:
-    ```
-    sbatch --export=OUTPUT_FOLDER=run_A,REPO_FOLDER=MY_FOLDER,LD_LIBRARY_PATH=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/lib64,INCLUDE=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/include temporal.slurm
-    ```
-    where
-        - `OUTPUT_FOLDER` specifies the output directory for benchmark logs (note that on Vista, the output folder will be stored in $SCRATCH).
-        - `REPO_FOLDER` is the folder name of where the GitHub repository was cloned into (e.g., `MY_FOLDER`).
-        - `LD_LIBRARY_PATH` and `INCLUDE` are environment variables required to locate the NVIDIA HPC SDK math libraries.
+```
+sbatch --export=OUTPUT_FOLDER=run_A,REPO_FOLDER=MY_FOLDER,LD_LIBRARY_PATH=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/lib64,INCLUDE=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/include temporal.slurm
+```
+where
+- `OUTPUT_FOLDER` specifies the output directory for benchmark logs (note that on Vista, the output folder will be stored in $SCRATCH).
+- `REPO_FOLDER` is the folder name of where the GitHub repository was cloned into (e.g., `MY_FOLDER`).
+- `LD_LIBRARY_PATH` and `INCLUDE` are environment variables required to locate the NVIDIA HPC SDK math libraries.
 
 Note that everything runs the same as the timestamp version of the micro-benchmark experiments, except that the BF16 and FP64 kernels are constrained to only run for 4 hours each.
 
@@ -275,9 +275,9 @@ Once the job finishes, on Vista, the folder containing all the data will be stor
                 ├── gpu_power_<GPU_ID>.csv
 ```
 where
-    - `<GPU_ID>` is the local rank of the GPU on the node (e.g., on Vista there is only 1 GPU per node so the ID is 0).
-    - `<GPU_ID>.csv` contains the per-iteration elapsed run-time of the kernel performing the workload with the specified precision. The columns are `size`, `iteration`, `start_ts`, `stop_ts`, and `time(ms)`.
-    - `gpu_power_<GPU_ID>.csv` contains the GPU telemetry recorded by the profiler throughout the kernel's execution. The columns are `sample`, `power(W)`, `gpu_util(%)`, `core_clock(MHz)`, `mem_clock(MHz)`, `timestamp_ns`, `temp(C)`, and `energy(mJ)`.
+- `<GPU_ID>` is the local rank of the GPU on the node (e.g., on Vista there is only 1 GPU per node so the ID is 0).
+- `<GPU_ID>.csv` contains the per-iteration elapsed run-time of the kernel performing the workload with the specified precision. The columns are `size`, `iteration`, `start_ts`, `stop_ts`, and `time(ms)`.
+- `gpu_power_<GPU_ID>.csv` contains the GPU telemetry recorded by the profiler throughout the kernel's execution. The columns are `sample`, `power(W)`, `gpu_util(%)`, `core_clock(MHz)`, `mem_clock(MHz)`, `timestamp_ns`, `temp(C)`, and `energy(mJ)`.
 
 ## Prerequisites
 
