@@ -1,14 +1,14 @@
-# Micro-benchmarks, Timestamp Experiment, and Temporal Analysis on TACC Vista (NVIDIA's GH200s)
+# Microbenchmarks, Timestamp Experiment, and Temporal Analysis on TACC Vista (NVIDIA's GH200s)
 
 For TACC Vista, our analysis consists of three experiments: micro-benchmarking, timestamp experiment, and temporal analysis.
 
-## Micro-benchmarks
+## Microbenchmarks
 
 ### Experiment Overview and Directory Structure
 
 The micro-benchmark experiment utilizes cuBLAS level 1, 2, and 3 API calls to perform matrix-matrix (both on Tensor Cores and CUDA Cores), matrix-vector (CUDA Cores), and vector-scalar (CUDA Cores) kernel operations with different data types (BF16, FP16, FP32, FP64, and FP8). On Vista, we ran it as a single-GPU application (per node) using NVIDIA's GH200 Superchips and allowed the application to run to completion.
 
-For compiling and launching the full experiment on NVIDIA GPUs, please see section [Compile and Run Micro-benchmarks](#compile-and-run-microbenchmarks). Below is an overview of this directory.
+For compiling and launching the full experiment on NVIDIA GPUs, please see section [Compile and Run Microbenchmarks](#compile-and-run-microbenchmarks). Below is an overview of this directory.
 ```
 ├── matrix-matrix
     ├── BF16/src/main.cu
@@ -37,7 +37,7 @@ For compiling and launching the full experiment on NVIDIA GPUs, please see secti
 ├── microbenchmarks.slurm: script that loads all modules, compiles all necessary library code, and runs the micro-benchmark workloads in sequence
 ```
 
-### Compile and Run Micro-benchmarks
+### Compile and Run Microbenchmarks
 
 To run the full micro-benchmark experiments, submit the SLURM script `microbenchmarks.slurm` via `sbatch` as shown below:
 ```
