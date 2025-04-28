@@ -1,14 +1,14 @@
-# Micro-benchmarks on NERSC Perlmutter (NVIDIA's A100s)
+# Microbenchmarks on NERSC Perlmutter (NVIDIA's A100s)
 
 For NERSC Perlmutter, our analysis consists of a micro-benchmarking experiment.
 
-## Micro-benchmarks
+## Microbenchmarks
 
 ### Experiment Overview and Directory Structure
 
 The micro-benchmark experiment utilizes cuBLAS level 1, 2, and 3 API calls to perform matrix-matrix (both on Tensor Cores and CUDA Cores), matrix-vector (CUDA Cores), and vector-scalar (CUDA Cores) kernel operations with different data types (BF16, FP16, FP32, and FP64). On Perlmutter, we ran it as a 4-GPU application (per node) using NVIDIA's A100 GPUs and allowed the application to run to completion.
 
-For compiling and launching the full experiment on NVIDIA GPUs, please see section [Compile and Run Micro-benchmarks](#compile-and-run-microbenchmarks). Below is an overview of this directory.
+For compiling and launching the full experiment on NVIDIA GPUs, please see section [Compile and Run Microbenchmarks](#compile-and-run-microbenchmarks). Below is an overview of this directory.
 ```
 ├── matrix-matrix
     ├── BF16/src/main.cu
@@ -36,7 +36,7 @@ For compiling and launching the full experiment on NVIDIA GPUs, please see secti
 ├── microbenchmarks.slurm: script that loads all modules, compiles all necessary library code, and runs the micro-benchmark workloads in sequence
 ```
 
-### Compile and Run Micro-benchmarks
+### Compile and Run Microbenchmarks
 
 To run the full micro-benchmark experiments, submit the SLURM script `microbenchmarks.slurm` via `sbatch` as shown below:
 ```
