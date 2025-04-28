@@ -40,7 +40,7 @@ fi
 mkdir -p "$TARGET_DIR"
 
 cp -r $WORK/$REPO_FOLDER/Performance_Variability_of_Ampere_and_Hopper_GPUs_SC25_Artifact/SC25_vista/shared $OUTPUT_FOLDER
-cp $WORK/$REPO_FOLDER/Performance_Variability_of_Ampere_and_Hopper_GPUs_SC25_Artifact/SC25_vista/namd_vista/test_namd.sh $OUTPUT_FOLDER/
+cp $WORK/$REPO_FOLDER/Performance_Variability_of_Ampere_and_Hopper_GPUs_SC25_Artifact/SC25_vista/namd_vista/namd.sh $OUTPUT_FOLDER/
 cp $WORK/$REPO_FOLDER/Performance_Variability_of_Ampere_and_Hopper_GPUs_SC25_Artifact/SC25_vista/namd_vista/2x2x2stmv.namd $OUTPUT_FOLDER/
 
 # Load necessary modules
@@ -78,16 +78,16 @@ ls -lR $OUTPUT_FOLDER
 
 export CUDA_VISIBLE_DEVICES=$SLURM_LOCALID
 
-# Ensure test_namd.sh exists
-if [ ! -f "$WORK/$OUTPUT_FOLDER/test_namd.sh" ]; then
-    echo "ERROR: test_namd.sh not found in $WORK/$OUTPUT_FOLDER"
+# Ensure namd.sh exists
+if [ ! -f "$WORK/$OUTPUT_FOLDER/namd.sh" ]; then
+    echo "ERROR: namd.sh not found in $WORK/$OUTPUT_FOLDER"
     exit 1
 fi
 
-# Running test_namd.sh
-echo 'Running test_namd.sh...'
-srun --ntasks=5 --ntasks-per-node=1 /bin/bash $WORK/$OUTPUT_FOLDER/test_namd.sh $WORK/$OUTPUT_FOLDER /tmp/$OUTPUT_FOLDER
+# Running namd.sh
+echo 'Running namd.sh...'
+srun --ntasks=5 --ntasks-per-node=1 /bin/bash $WORK/$OUTPUT_FOLDER/namd.sh $WORK/$OUTPUT_FOLDER /tmp/$OUTPUT_FOLDER
 wait
-echo "Finished test_namd.sh!"
+echo "Finished namd.sh!"
 
 exit
