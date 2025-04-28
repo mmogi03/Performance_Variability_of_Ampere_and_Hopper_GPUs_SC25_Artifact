@@ -287,4 +287,4 @@ where
 
 ## Post-Processing
 
-Note that on Vista, `$SCRATCH` is a temporary file system and is subject to purging. The user should manually move the entire `OUTPUT_FOLDER` back into permanent storage, such as `$WORK`, before performing any data analysis.
+Note that on Vista, `$SCRATCH` is a temporary file system and is subject to purging. The user should manually move the entire `OUTPUT_FOLDER` back into permanent storage, such as Work (`$WORK`), before performing any data analysis.
