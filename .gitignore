@@ -1,2 +1,36 @@
 */outputs/*
 SC25_dtai/dtai_outputs/
+
+# General
+*.swp
+*.swo
+*.tmp
+*.log
+
+# Slurm stdout/err (default names; users may override -o/-e)
+*.out
+*.err
+combined_*.out
+combined_*.err
+
+# CUDA/CMake build artifacts
+**/build/
+**/CMakeFiles/
+**/CMakeCache.txt
+**/cmake_install.cmake
+**/Makefile
+
+# Compiled binaries in-place
+**/src/main
+**/wgmma_sm90_bench
+**/wgmma_tma_sm90_bench
+**/dumpGpuPower
+
+# Experiment outputs (do not commit data)
+**/exp_cublas/outputs/
+**/exp_cublas/vista-output/
+**/exp_cutlass_tma/outputs/
+**/exp_cutlass_tma/results/
+
+# Node/GPU identity tracking (data)
+**/node_info/*.csv
