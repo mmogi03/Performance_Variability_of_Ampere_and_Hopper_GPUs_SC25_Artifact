@@ -84,8 +84,7 @@ cp -r "${REPO_FOLDER}/exp_cublas_cuda_12.4/matrix-matrix" "${SCRATCH_RUN}/exp_cu
 cp -r "${REPO_FOLDER}/exp_cublas_cuda_12.4/scripts"       "${SCRATCH_RUN}/exp_cublas_cuda_12.4/"
 
 mkdir -p "${SCRATCH_RUN}/exp_stream"
-cp -r "${REPO_FOLDER}/exp_stream/matrix-matrix" "${SCRATCH_RUN}/exp_stream/"
-cp -r "${REPO_FOLDER}/exp_stream/scripts"       "${SCRATCH_RUN}/exp_stream/"
+cp -r "${REPO_FOLDER}/exp_stream/stream-gpu-linux-aarch64-gpu" "${SCRATCH_RUN}/exp_stream/"
 
 mkdir -p "${SCRATCH_RUN}/node_info/per_node"
 
@@ -229,7 +228,7 @@ mkdir -p "${SCRATCH_RUN}/exp_cublas_cuda_11.8/vista-output/matrix-matrix-output"
 
 echo "Running srun BF16-cuda11 wrapper..."
 srun --export=ALL --ntasks="${SLURM_NNODES}" --ntasks-per-node=1 \
-  /bin/bash "${SCRATCH_RUN}/exp_cublas_cuda_11.8/scripts/run_mm_bf16_cuda11.sh" "${SCRATCH_RUN}" "${TMP_BASE}"
+  /bin/bash "${SCRATCH_RUN}/exp_cublas_cuda_11.8/scripts/run_mm_bf16_cuda118.sh" "${SCRATCH_RUN}" "${TMP_BASE}"
 
 echo "cuBLAS BF16-cuda118 done."
 
@@ -269,9 +268,9 @@ cmake --build . -j
 
 mkdir -p "${SCRATCH_RUN}/exp_cublas_cuda_12.4/vista-output/matrix-matrix-output"
 
-echo "Running srun BF16-cuda13 wrapper..."
+echo "Running srun BF16-cuda124 wrapper..."
 srun --export=ALL --ntasks="${SLURM_NNODES}" --ntasks-per-node=1 \
-  /bin/bash "${SCRATCH_RUN}/exp_cublas_cuda_12.4/scripts/run_mm_bf16_cuda13.sh" "${SCRATCH_RUN}" "${TMP_BASE}"
+  /bin/bash "${SCRATCH_RUN}/exp_cublas_cuda_12.4/scripts/run_mm_bf16_cuda124.sh" "${SCRATCH_RUN}" "${TMP_BASE}"
 
 echo "cuBLAS BF16-cuda124 done."
 

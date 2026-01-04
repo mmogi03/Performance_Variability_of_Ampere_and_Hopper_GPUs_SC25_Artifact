@@ -12,7 +12,7 @@ fi
 SCRATCH_RUN_ROOT="$1"
 TMP_BASE="$2"
 
-EXP_ROOT="${SCRATCH_RUN_ROOT}/exp_cublas"
+EXP_ROOT="${SCRATCH_RUN_ROOT}/exp_cublas_cuda_12.4"
 MM_DIR="${EXP_ROOT}/matrix-matrix"
 BIN="${MM_DIR}/BF16/src/main"
 PROFILER="${SCRATCH_RUN_ROOT}/shared/dumpGpuPower"

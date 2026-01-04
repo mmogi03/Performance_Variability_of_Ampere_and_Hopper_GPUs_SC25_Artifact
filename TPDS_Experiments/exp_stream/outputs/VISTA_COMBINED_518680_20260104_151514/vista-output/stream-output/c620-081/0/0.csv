@@ -1,0 +1,21 @@
+
+======================================================================================
+NVIDIA-STREAM 25.9.0  -- NVIDIA accelerated STREAM benchmark -- NVIDIA
+======================================================================================
+There is 1 device supporting CUDA
+Device 0: "NVIDIA GH200 120GB" 	 132 SMs(9.0)	Memory: 2619MHz x 6144-bit = 4022.8 GB/s PEAK	 ECC is ON
+
+Device Selected 0: "NVIDIA GH200 120GB"
+ STREAM Benchmark implementation in CUDA
+ Array size (float)=1308622848*4*8 (39936 MB)
+
+STREAM tests: COPY SCALE ADD TRIAD
+
+Optimizing...
+
+
+Function      Rate (MB/s)   Avg time     Min time     Max time
+Copy:      3672976.8259       0.0029       0.0029       0.0029
+Scale:     3669927.8918       0.0029       0.0029       0.0029
+Add:       3751986.3325       0.0042       0.0042       0.0042
+Triad:     3747230.4492       0.0042       0.0042       0.0042
