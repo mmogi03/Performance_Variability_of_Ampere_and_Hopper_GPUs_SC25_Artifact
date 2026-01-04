@@ -1,12 +1,12 @@
 #!/bin/bash -l
 
-#SBATCH -N 1
+#SBATCH -N 2
 #SBATCH --job-name=TPDS_VISTA_COMBINED
 #SBATCH --mail-type=all
-#SBATCH --mail-user=<email>
+#SBATCH --mail-user=hgz5@scarletmail.rutgers.edu
 #SBATCH -o outputs/O_TPDS_VISTA_COMBINED__%j.out
 #SBATCH -e outputs/E_TPDS_VISTA_COMBINED__%j.err
-#SBATCH -A <account>
+#SBATCH -A CCR24047
 #SBATCH -p gh
 #SBATCH --time=01:00:00
 #SBATCH --ntasks-per-node=1
@@ -244,6 +244,134 @@ JOB_ID=${SLURM_JOB_ID}
 NODES=${SLURM_NODELIST}
 DATETIME=${TS}
 EXPERIMENT=CUTLASS non-TMA BF16 u01 + TMA BF16 u01 (repeats=100 warmup=20)
+EOF
+
+# ---------------------------
+# 3) Experiment C: cuBLAS matrix-matrix BF16 only with cuda version 11.8
+# ---------------------------
+echo "==== Step 3: cuBLAS matrix-matrix BF16-cuda11 ===="
+
+module purge
+module load nvidia/23.11
+module load cuda/11.8
+
+# Required for Vista Makefiles
+export LD_LIBRARY_PATH=/home1/apps/nvidia/Linux_aarch64/23.11/math_libs/lib64
+export INCLUDE=/home1/apps/nvidia/Linux_aarch64/23.11/math_libs/include
+
+echo "Modules:"
+module list
+
+echo "Building shared/dumpGpuPower..."
+make -C "${SCRATCH_RUN}/shared" clean
+make -C "${SCRATCH_RUN}/shared"
+
+echo "Building exp_cublas_cuda_11.8/matrix-matrix..."
+make -C "${SCRATCH_RUN}/exp_cublas_cuda_11.8/matrix-matrix" clean
+make -C "${SCRATCH_RUN}/exp_cublas_cuda_11.8/matrix-matrix"
+
+mkdir -p "${SCRATCH_RUN}/exp_cublas_cuda_11.8/vista-output/matrix-matrix-output"
+
+echo "Running srun BF16-cuda11 wrapper..."
+srun --export=ALL --ntasks="${SLURM_NNODES}" --ntasks-per-node=1 \
+  /bin/bash "${SCRATCH_RUN}/exp_cublas_cuda_11.8/scripts/run_mm_bf16_cuda11.sh" "${SCRATCH_RUN}" "${TMP_BASE}"
+
+echo "cuBLAS BF16-cuda11 done."
+
+CUBLAS_REPO_OUT="${REPO_FOLDER}/exp_cublas_cuda_11.8/outputs/${RUN_ID}"
+mkdir -p "${CUBLAS_REPO_OUT}"
+copy_dir_to_repo "${SCRATCH_RUN}/exp_cublas_cuda_11.8/vista-output" "${CUBLAS_REPO_OUT}/vista-output"
+
+cat > "${CUBLAS_REPO_OUT}/run_manifest.txt" <<EOF
+RUN_ID=${RUN_ID}
+JOB_ID=${SLURM_JOB_ID}
+NODES=${SLURM_NODELIST}
+DATETIME=${TS}
+EXPERIMENT=cuBLAS matrix-matrix BF16 cuda11
+EOF
+
+# ---------------------------
+# 4) Experiment D: cuBLAS matrix-matrix BF16 only with cuda version 13.0
+# ---------------------------
+echo "==== Step 4: cuBLAS matrix-matrix BF16-cuda13 ===="
+
+module purge
+module load nvidia/24.7
+module load cuda/13.0
+
+# Required for Vista Makefiles
+export LD_LIBRARY_PATH=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/lib64
+export INCLUDE=/home1/apps/nvidia/Linux_aarch64/24.7/math_libs/include
+
+echo "Modules:"
+module list
+
+
+echo "Building shared/dumpGpuPower..."
+make -C "${SCRATCH_RUN}/shared" clean
+make -C "${SCRATCH_RUN}/shared"
+
+echo "Building exp_cublas_cuda_13.0/matrix-matrix..."
+make -C "${SCRATCH_RUN}/exp_cublas_cuda_13.0/matrix-matrix" clean
+make -C "${SCRATCH_RUN}/exp_cublas_cuda_13.0/matrix-matrix"
+
+mkdir -p "${SCRATCH_RUN}/exp_cublas_cuda_13.0/vista-output/matrix-matrix-output"
+
+echo "Running srun BF16-cuda13 wrapper..."
+srun --export=ALL --ntasks="${SLURM_NNODES}" --ntasks-per-node=1 \
+  /bin/bash "${SCRATCH_RUN}/exp_cublas_cuda_13.0/scripts/run_mm_bf16_cuda13.sh" "${SCRATCH_RUN}" "${TMP_BASE}"
+
+echo "cuBLAS BF16-cuda13 done."
+
+CUBLAS_REPO_OUT="${REPO_FOLDER}/exp_cublas_cuda_13.0/outputs/${RUN_ID}"
+mkdir -p "${CUBLAS_REPO_OUT}"
+copy_dir_to_repo "${SCRATCH_RUN}/exp_cublas_cuda_13.0/vista-output" "${CUBLAS_REPO_OUT}/vista-output"
+
+cat > "${CUBLAS_REPO_OUT}/run_manifest.txt" <<EOF
+RUN_ID=${RUN_ID}
+JOB_ID=${SLURM_JOB_ID}
+NODES=${SLURM_NODELIST}
+DATETIME=${TS}
+EXPERIMENT=cuBLAS matrix-matrix BF16 cuda13
+EOF
+
+# ---------------------------
+# 5) Experiment E: STREAM Bandwidth Benchmark
+# ---------------------------
+echo "==== Step 5: STREAM Bandwidth Benchmark ===="
+
+module purge
+module load gcc/13.2.0 cuda/12.8
+module load openmpi/5.0.5
+
+echo "Modules:"
+module list
+
+THREADS=72                 # Adjust based on system memory capacity
+export OMP_NUM_THREADS=$THREADS
+export OMP_PROC_BIND=spread
+
+echo "OMP_NUM_THREADS=$OMP_NUM_THREADS"
+echo "OMP_PROC_BIND=$OMP_PROC_BIND"
+
+mkdir -p "${SCRATCH_RUN}/exp_stream/vista-output/stream-output"
+
+echo "Running srun STREAM GPU wrapper..."
+srun --export=ALL --ntasks="${SLURM_NNODES}" --ntasks-per-node=1 \
+  /bin/bash "${SCRATCH_RUN}/exp_stream/stream-gpu-linux-aarch64-gpu/stream-gpu-test.sh" "${SCRATCH_RUN}" "${TMP_BASE}"
+
+echo "cuBLAS BF16-only done."
+
+CUBLAS_REPO_OUT="${REPO_FOLDER}/exp_stream/outputs/${RUN_ID}"
+mkdir -p "${CUBLAS_REPO_OUT}"
+copy_dir_to_repo "${SCRATCH_RUN}/exp_stream/vista-output" "${CUBLAS_REPO_OUT}/vista-output"
+
+cat > "${CUBLAS_REPO_OUT}/run_manifest.txt" <<EOF
+RUN_ID=${RUN_ID}
+JOB_ID=${SLURM_JOB_ID}
+NODES=${SLURM_NODELIST}
+DATETIME=${TS}
+EXPERIMENT=STREAM
 EOF
 
 echo "==== Combined job complete ===="
